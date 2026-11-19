@@ -41,7 +41,7 @@ flowchart LR
 
 **The idea:** On long missions the crew can't count on a ground doctor in real time, so astronauts need to spot changes in themselves. VITALIS compares each crew member to their *own* baseline, explains every flag in plain language, and offers a clearly labeled draft response. It keeps working offline.
 
-**Try it:** [Live demo](TODO-add-vercel-url) · [Demo video](TODO-add-video-url) · [Slides](TODO-add-slides-url)
+**Try it:** [Live demo](http://localhost:5173/) ·
 
 > Note: the free-tier API may need up to a minute to wake on first load.
 
@@ -59,14 +59,6 @@ flowchart LR
 | --- | --- |
 | ![Protocol](docs/screenshots/protocol.png) | ![Offline](docs/screenshots/offline.png) |
 
-### Team
-
-| Name | Role |
-| --- | --- |
-| TODO | Core engines and simulator |
-| TODO | Backend and database |
-| TODO | Frontend |
-| TODO | Protocol content, pitch and QA |
 
 ### Roadmap
 
