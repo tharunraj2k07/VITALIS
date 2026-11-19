@@ -1,0 +1,12 @@
+{
+  "name": "VITALIS Mission Health",
+  "short_name": "VITALIS",
+  "description": "Offline-first astronaut health monitoring prototype.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07111b",
+  "theme_color": "#07111b",
+  "icons": [
+    { "src": "/vitalis.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

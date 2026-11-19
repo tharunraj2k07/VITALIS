@@ -1,0 +1,38 @@
+{
+  "name": "vitalis",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "24.13.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm --workspace @vitalis/api run dev",
+    "dev:web": "npm --workspace @vitalis/web run dev",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "eslint . --max-warnings 0",
+    "test:e2e": "node scripts/run-playwright.mjs --grep-invert @screenshots",
+    "screenshots": "node scripts/run-playwright.mjs --grep @screenshots",
+    "test": "npm run test --workspaces --if-present",
+    "setup:env": "node scripts/copy-env.mjs",
+    "demo": "tsx scripts/demo-mission.ts",
+    "validate:protocols": "tsx scripts/validate-protocols.ts",
+    "smoke": "node scripts/smoke-test.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.65.1",
+    "concurrently": "^9.1.2",
+    "eslint": "^10.15.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^16.5.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.72.2"
+  }
+}

@@ -1,0 +1,14 @@
+PRAGMA foreign_keys = ON;
+CREATE TABLE IF NOT EXISTS crew_members (id TEXT PRIMARY KEY, name TEXT NOT NULL, role TEXT NOT NULL, mission_day INTEGER NOT NULL DEFAULT 0);
+CREATE TABLE IF NOT EXISTS baselines (crew_id TEXT NOT NULL REFERENCES crew_members(id), metric TEXT NOT NULL, mean REAL NOT NULL, std REAL NOT NULL, sample_count INTEGER NOT NULL, PRIMARY KEY (crew_id, metric));
+CREATE TABLE IF NOT EXISTS observations (id INTEGER PRIMARY KEY AUTOINCREMENT, crew_id TEXT NOT NULL REFERENCES crew_members(id), day INTEGER NOT NULL, phase TEXT NOT NULL, metric TEXT NOT NULL, value REAL NOT NULL);
+CREATE INDEX IF NOT EXISTS idx_observations_crew_day_metric ON observations(crew_id, day, metric);
+CREATE TABLE IF NOT EXISTS checkins (id TEXT PRIMARY KEY, crew_id TEXT NOT NULL REFERENCES crew_members(id), day INTEGER NOT NULL, mood INTEGER NOT NULL, sleep_quality INTEGER NOT NULL, congestion INTEGER NOT NULL, headache INTEGER NOT NULL, notes TEXT NOT NULL DEFAULT '', created_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS domain_scores (crew_id TEXT NOT NULL REFERENCES crew_members(id), day INTEGER NOT NULL, domain TEXT NOT NULL, score INTEGER NOT NULL, explanation TEXT NOT NULL, PRIMARY KEY (crew_id, day, domain));
+CREATE TABLE IF NOT EXISTS alerts (id TEXT PRIMARY KEY, crew_id TEXT NOT NULL REFERENCES crew_members(id), day INTEGER NOT NULL, metric TEXT NOT NULL, severity TEXT NOT NULL, status TEXT NOT NULL, value REAL NOT NULL, baseline_mean REAL NOT NULL, baseline_std REAL NOT NULL, z_score REAL NOT NULL, explanation TEXT NOT NULL, related_metrics TEXT NOT NULL DEFAULT '[]');
+CREATE INDEX IF NOT EXISTS idx_alerts_crew_status ON alerts(crew_id, status);
+CREATE TABLE IF NOT EXISTS protocols (id TEXT PRIMARY KEY, data_json TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS protocol_sources (protocol_id TEXT NOT NULL REFERENCES protocols(id), title TEXT NOT NULL, url TEXT NOT NULL, PRIMARY KEY (protocol_id, title));
+CREATE TABLE IF NOT EXISTS alert_actions (id TEXT PRIMARY KEY, alert_id TEXT NOT NULL REFERENCES alerts(id), action TEXT NOT NULL, created_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS scenarios (id TEXT PRIMARY KEY, crew_id TEXT NOT NULL REFERENCES crew_members(id), type TEXT NOT NULL, start_day INTEGER NOT NULL, duration_days INTEGER NOT NULL, created_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS sync_queue (id TEXT PRIMARY KEY, kind TEXT NOT NULL, payload_json TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'pending', created_at TEXT NOT NULL);

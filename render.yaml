@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: vitalis-api
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build --workspace @vitalis/api
+    startCommand: npm run start --workspace @vitalis/api
+    healthCheckPath: /api/health
+    disk:
+      name: vitalis-sqlite
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 24.13.0
+      - key: DATABASE_PATH
+        value: /var/data/vitalis.sqlite
+      - key: CORS_ORIGINS
+        sync: false
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 60000
+      - key: RATE_LIMIT_MAX
+        value: 120

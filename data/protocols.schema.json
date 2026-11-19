@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VITALIS protocol drafts",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "domain",
+      "title",
+      "tier",
+      "trigger",
+      "non_drug_steps",
+      "medication_category",
+      "escalate_if",
+      "sources",
+      "verified",
+      "disclaimer"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "domain": {
+        "type": "string",
+        "enum": ["cardiovascular", "sleep_immune", "musculoskeletal", "radiation", "behavioral_cognitive"]
+      },
+      "title": { "type": "string", "minLength": 1 },
+      "tier": { "type": "string", "enum": ["self_manage", "monitor", "escalate"] },
+      "trigger": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "any_metric": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "resting_hr",
+                "systolic_bp",
+                "diastolic_bp",
+                "spo2",
+                "skin_temp",
+                "sleep_hours",
+                "sleep_efficiency",
+                "exercise_minutes",
+                "radiation_dose_cumulative",
+                "mood",
+                "congestion",
+                "reaction_time"
+              ]
+            }
+          },
+          "min_severity": { "type": "string", "enum": ["amber", "red"] }
+        }
+      },
+      "non_drug_steps": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "type": "string", "minLength": 1 }
+      },
+      "medication_category": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["class", "note"],
+            "additionalProperties": false,
+            "properties": {
+              "class": { "type": "string", "minLength": 1 },
+              "note": { "type": "string", "minLength": 1 }
+            }
+          },
+          { "type": "null" }
+        ]
+      },
+      "escalate_if": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "type": "string", "minLength": 1 }
+      },
+      "sources": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["title", "url"],
+          "additionalProperties": false,
+          "properties": {
+            "title": { "type": "string", "minLength": 1 },
+            "url": { "type": "string", "minLength": 1 }
+          }
+        }
+      },
+      "verified": { "type": "boolean" },
+      "disclaimer": { "const": "Decision support only, not medical advice." }
+    }
+  }
+}

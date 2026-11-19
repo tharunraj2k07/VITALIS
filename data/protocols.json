@@ -1,0 +1,93 @@
+[
+  {
+    "id": "fluid-shift-congestion",
+    "domain": "sleep_immune",
+    "title": "Head fullness or congestion during adaptation",
+    "tier": "self_manage",
+    "trigger": { "any_metric": ["congestion"], "min_severity": "amber" },
+    "non_drug_steps": ["Record when the fullness is most noticeable and any associated symptoms.", "Use the official onboard fluid-shift observation and comfort procedure.", "Recheck the symptom and record the change at the next check-in."],
+    "medication_category": { "class": "symptom-relief category per onboard formulary", "note": "dose per official onboard procedure" },
+    "escalate_if": ["Symptoms are severe, rapidly worsening, or affect vision, breathing, or safe task performance."],
+    "sources": [{ "title": "TODO: NASA/ISS public medical reference", "url": "TODO" }],
+    "verified": false,
+    "disclaimer": "Decision support only, not medical advice."
+  },
+  {
+    "id": "sleep-disruption",
+    "domain": "sleep_immune",
+    "title": "Sleep disruption",
+    "tier": "self_manage",
+    "trigger": { "any_metric": ["sleep_hours", "sleep_efficiency"], "min_severity": "amber" },
+    "non_drug_steps": ["Log sleep and wake times, interruptions, and contributing environment factors.", "Use the mission-approved sleep routine and protect the scheduled sleep opportunity.", "Reassess sleep at the next daily check-in."],
+    "medication_category": { "class": "sleep-support category per onboard formulary", "note": "dose per official onboard procedure" },
+    "escalate_if": ["Sleep loss persists or impairs alertness, judgment, or mission duties."],
+    "sources": [{ "title": "TODO: NASA/ISS public medical reference", "url": "TODO" }],
+    "verified": false,
+    "disclaimer": "Decision support only, not medical advice."
+  },
+  {
+    "id": "musculoskeletal-trend",
+    "domain": "musculoskeletal",
+    "title": "Musculoskeletal or bone-protection trend",
+    "tier": "monitor",
+    "trigger": { "any_metric": ["exercise_minutes"], "min_severity": "amber" },
+    "non_drug_steps": ["Review exercise completion and equipment availability in the mission log.", "Follow the assigned exercise and bone-protection plan; do not make unapproved changes.", "Track discomfort, function, and exercise minutes at the next check-in."],
+    "medication_category": null,
+    "escalate_if": ["New pain, weakness, injury, or reduced ability to perform assigned tasks."],
+    "sources": [{ "title": "TODO: NASA/ISS public medical reference", "url": "TODO" }],
+    "verified": false,
+    "disclaimer": "Decision support only, not medical advice."
+  },
+  {
+    "id": "cardiovascular-drift",
+    "domain": "cardiovascular",
+    "title": "Blood pressure or heart-rate drift",
+    "tier": "escalate",
+    "trigger": { "any_metric": ["systolic_bp", "diastolic_bp", "resting_hr"], "min_severity": "amber" },
+    "non_drug_steps": ["Pause strenuous activity and repeat the measurement using the approved measurement procedure.", "Record the reading, time, symptoms, and measurement conditions.", "Contact ground / follow the emergency procedure when escalation criteria are met."],
+    "medication_category": null,
+    "escalate_if": ["Red alert, repeated abnormal readings, chest discomfort, fainting, shortness of breath, or new rhythm symptoms."],
+    "sources": [{ "title": "TODO: NASA/ISS public medical reference", "url": "TODO" }],
+    "verified": false,
+    "disclaimer": "Decision support only, not medical advice."
+  },
+  {
+    "id": "behavioral-decline",
+    "domain": "behavioral_cognitive",
+    "title": "Behavioral or cognitive decline",
+    "tier": "escalate",
+    "trigger": { "any_metric": ["mood", "reaction_time"], "min_severity": "amber" },
+    "non_drug_steps": ["Record the change and any sleep, workload, or isolation factors.", "Use the mission-approved peer-support and behavioral-health check-in.", "Contact ground / follow the emergency procedure if safety is at risk."],
+    "medication_category": null,
+    "escalate_if": ["Decline persists, affects judgment or crew safety, or includes thoughts of self-harm."],
+    "sources": [{ "title": "TODO: NASA/ISS public medical reference", "url": "TODO" }],
+    "verified": false,
+    "disclaimer": "Decision support only, not medical advice."
+  },
+  {
+    "id": "radiation-threshold",
+    "domain": "radiation",
+    "title": "Radiation dose threshold",
+    "tier": "monitor",
+    "trigger": { "any_metric": ["radiation_dose_cumulative"], "min_severity": "amber" },
+    "non_drug_steps": ["Confirm dosimeter and exposure records using the mission procedure.", "Review mission radiation-monitoring guidance and the current shelter instruction.", "Log the dose and follow the crew radiation-response checklist."],
+    "medication_category": null,
+    "escalate_if": ["Mission threshold is crossed, dosimeter data are inconsistent, or a solar-particle event is announced."],
+    "sources": [{ "title": "TODO: NASA/ISS public medical reference", "url": "TODO" }],
+    "verified": false,
+    "disclaimer": "Decision support only, not medical advice."
+  },
+  {
+    "id": "general-escalation",
+    "domain": "cardiovascular",
+    "title": "General urgent health escalation",
+    "tier": "escalate",
+    "trigger": { "min_severity": "red" },
+    "non_drug_steps": ["Contact ground / follow the emergency procedure.", "Share the flagged measurement, symptoms, and recent trend with the crew medical officer or ground team."],
+    "medication_category": null,
+    "escalate_if": ["Any red alert or rapidly worsening symptom."],
+    "sources": [{ "title": "TODO: NASA/ISS public medical reference", "url": "TODO" }],
+    "verified": false,
+    "disclaimer": "Decision support only, not medical advice."
+  }
+]
